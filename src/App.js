@@ -20,7 +20,77 @@ function App() {
         </ul>
       </header>
       <div className="content p-40">
-        <h1>Все кроссовки</h1>. . .
+        <h1 className="mb-40">Все кроссовки</h1>
+        <div className="d-flex">
+          <div className="card">
+            <img
+              className="sneakersPhoto"
+              src="/img/sneakers/1.jpg"
+              alt="sneakers"
+            />
+            <h5>Мужские кроссовки Nike Blazer Mid Suede</h5>
+            <div className="d-flex justify-between align-center">
+              <div className="d-flex flex-column">
+                <span>Цена: </span>
+                <b>12 999 руб.</b>
+              </div>
+              <button className="button">
+                <img src="/img/plus.svg" alt="plus" />
+              </button>
+            </div>
+          </div>
+          <div className="card">
+            <img
+              className="sneakersPhoto"
+              src="/img/sneakers/2.jpg"
+              alt="sneakers"
+            />
+            <h5>Мужские кроссовки Nike Blazer Mid Suede</h5>
+            <div className="d-flex justify-between align-center">
+              <div className="d-flex flex-column">
+                <span>Цена: </span>
+                <b>12 999 руб.</b>
+              </div>
+              <button className="button">
+                <img src="/img/plus.svg" alt="plus" />
+              </button>
+            </div>
+          </div>
+          <div className="card">
+            <img
+              className="sneakersPhoto"
+              src="/img/sneakers/3.jpg"
+              alt="sneakers"
+            />
+            <h5>Мужские кроссовки Nike Blazer Mid Suede</h5>
+            <div className="d-flex justify-between align-center">
+              <div className="d-flex flex-column">
+                <span>Цена: </span>
+                <b>12 999 руб.</b>
+              </div>
+              <button className="button">
+                <img src="/img/plus.svg" alt="plus" />
+              </button>
+            </div>
+          </div>
+          <div className="card">
+            <img
+              className="sneakersPhoto"
+              src="/img/sneakers/4.jpg"
+              alt="sneakers"
+            />
+            <h5>Мужские кроссовки Nike Blazer Mid Suede</h5>
+            <div className="d-flex justify-between align-center">
+              <div className="d-flex flex-column">
+                <span>Цена: </span>
+                <b>12 999 руб.</b>
+              </div>
+              <button className="button">
+                <img src="/img/plus.svg" alt="plus" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

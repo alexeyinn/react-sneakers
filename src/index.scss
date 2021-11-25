@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: system-ui;
+  font-family: "inter", system-ui;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e7f6ff;
@@ -38,4 +38,31 @@ header {
   h1 {
     margin: 0;
   }
+}
+
+.card {
+  border: 1px solid #f3f3f3;
+  padding: 30px;
+  width: 210px;
+  border-radius: 40px;
+}
+
+.button {
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  border-radius: 8px;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+
+  h5 {
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
+
+.sneakersPhoto {
+  width: 133px;
+  height: 112px;
 }
