@@ -4,8 +4,15 @@ function App() {
       <div className="App clear">
         <div className="overlay">
           <div className="drawer">
-            <h2>Корзина</h2>
-            .cartItem
+            <h2 className="mb-30">Корзина</h2>
+            <div className="cartItem d-flex align-center mb-20">
+              <img className="mr-20" src="/img/sneakers/1.jpg" alt="sneakers" />
+              <div className="mr-20">
+                <p className="mb-5">Мужские кроссовки Nike Air Max 270</p>
+                <b>12 999 руб.</b>
+              </div>
+              <img src="/img/btn-remove.svg" alt="remove" />
+            </div>
           </div>
         </div>
         <header className="d-flex justify-between align-center p-40">
