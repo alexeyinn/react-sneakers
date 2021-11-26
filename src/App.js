@@ -29,6 +29,9 @@ function App() {
         </div>
         <div className="d-flex">
           <div className="card">
+            <div className="favourite">
+              <img src="/img/heart-unliked.svg" alt="unliked" />
+            </div>
             <img
               className="sneakersPhoto"
               src="/img/sneakers/1.jpg"
