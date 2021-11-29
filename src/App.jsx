@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import Card from "./components/Card";
-import Drawer from "./components/Drawer";
-import Header from "./components/Header";
+import Card from "./components/Card/";
+import Drawer from "./components/Drawer/";
+import Header from "./components/Header/";
 
 function App() {
   const [items, setItems] = useState([]);
