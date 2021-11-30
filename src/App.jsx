@@ -7,6 +7,7 @@ import Header from "./components/Header/";
 
 function App() {
   const [items, setItems] = useState([]);
+  const [cartIsOpened, setCartIsOpened] = useState(false);
 
   useEffect(() => {
     axios
@@ -17,8 +18,13 @@ function App() {
   return (
     <div>
       <div className="App clear">
-        <Drawer />
-        <Header />
+        {cartIsOpened && (
+          <Drawer
+            cartIsOpened={cartIsOpened}
+            setCartIsOpened={setCartIsOpened}
+          />
+        )}
+        <Header cartIsOpened={cartIsOpened} setCartIsOpened={setCartIsOpened} />
         <div className="content p-40">
           <div className="mb-40 align-between justify-between d-flex">
             <h1>Все кроссовки</h1>
