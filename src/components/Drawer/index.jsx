@@ -13,9 +13,9 @@ function Drawer(props) {
             onClick={() => props.setCartIsOpened(!props.cartIsOpened)}
           />
         </h2>
-        {props.cartItems &&
-          props.cartItems.map((item) => (
-            <div className={styles.items}>
+        <div className={styles.items}>
+          {props.cartItems &&
+            props.cartItems.map((item) => (
               <div className={styles.cartItem + " d-flex align-center mb-20"}>
                 <img className="mr-20" src={item.itemSrc} alt="sneakers" />
                 <div className="mr-20">
@@ -24,8 +24,8 @@ function Drawer(props) {
                 </div>
                 <img src="/img/btn-remove.svg" alt="remove" />
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
         <div className={styles.cartTotalBlock}>
           <ul>
             <li>
