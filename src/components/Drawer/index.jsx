@@ -16,7 +16,10 @@ function Drawer(props) {
         <div className={styles.items}>
           {props.cartItems &&
             props.cartItems.map((item) => (
-              <div className={styles.cartItem + " d-flex align-center mb-20"}>
+              <div
+                key={item.id}
+                className={styles.cartItem + " d-flex align-center mb-20"}
+              >
                 <img className="mr-20" src={item.itemSrc} alt="sneakers" />
                 <div className="mr-20">
                   <p className="mb-5">{item.itemTitle}</p>

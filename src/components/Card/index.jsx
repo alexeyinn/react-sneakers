@@ -1,9 +1,13 @@
+import React, { useState } from "react";
 import axios from "axios";
 
 import styles from "./Card.module.scss";
 
 function Card({ itemTitle, itemSrc, itemPrice, onAdd }) {
+  const [isAdded, setIsAdded] = useState("/img/add-to-cart.svg");
+
   const onPlus = () => {
+    setIsAdded("/img/added-to-cart.svg");
     let objForCart = { itemTitle, itemSrc, itemPrice };
     onAdd(objForCart);
     axios.post("https://61a4c68d4c822c0017041e68.mockapi.io/cart", objForCart);
@@ -22,7 +26,7 @@ function Card({ itemTitle, itemSrc, itemPrice, onAdd }) {
           <b>{itemPrice}</b>
         </div>
         <button className="button" onClick={onPlus}>
-          <img src="/img/plus.svg" alt="plus" />
+          <img src={isAdded} alt="plus" />
         </button>
       </div>
     </div>
