@@ -13,16 +13,19 @@ function Drawer(props) {
             onClick={() => props.setCartIsOpened(!props.cartIsOpened)}
           />
         </h2>
-        <div className={styles.items}>
-          <div className={styles.cartItem + " d-flex align-center mb-20"}>
-            <img className="mr-20" src="/img/sneakers/1.jpg" alt="sneakers" />
-            <div className="mr-20">
-              <p className="mb-5">Мужские кроссовки Nike Air Max 270</p>
-              <b>12 999 руб.</b>
+        {props.cartItems &&
+          props.cartItems.map((item) => (
+            <div className={styles.items}>
+              <div className={styles.cartItem + " d-flex align-center mb-20"}>
+                <img className="mr-20" src={item.itemSrc} alt="sneakers" />
+                <div className="mr-20">
+                  <p className="mb-5">{item.itemTitle}</p>
+                  <b>{item.itemPrice}</b>
+                </div>
+                <img src="/img/btn-remove.svg" alt="remove" />
+              </div>
             </div>
-            <img src="/img/btn-remove.svg" alt="remove" />
-          </div>
-        </div>
+          ))}
         <div className={styles.cartTotalBlock}>
           <ul>
             <li>

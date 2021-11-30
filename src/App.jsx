@@ -8,6 +8,7 @@ import Header from "./components/Header/";
 function App() {
   const [items, setItems] = useState([]);
   const [cartIsOpened, setCartIsOpened] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     axios
@@ -22,6 +23,7 @@ function App() {
           <Drawer
             cartIsOpened={cartIsOpened}
             setCartIsOpened={setCartIsOpened}
+            cartItems={cartItems}
           />
         )}
         <Header cartIsOpened={cartIsOpened} setCartIsOpened={setCartIsOpened} />
@@ -41,6 +43,7 @@ function App() {
                   itemTitle={items.title}
                   itemSrc={items.imageUrl}
                   itemPrice={items.price}
+                  onAdd={(obj) => setCartItems([...cartItems, obj])}
                 />
               ))}
           </div>
