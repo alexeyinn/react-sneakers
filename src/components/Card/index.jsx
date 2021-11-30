@@ -1,8 +1,12 @@
+import axios from "axios";
+
 import styles from "./Card.module.scss";
 
 function Card({ itemTitle, itemSrc, itemPrice, onAdd }) {
   const onPlus = () => {
-    onAdd({ itemTitle, itemSrc, itemPrice });
+    let objForCart = { itemTitle, itemSrc, itemPrice };
+    onAdd(objForCart);
+    axios.post("https://61a4c68d4c822c0017041e68.mockapi.io/cart", objForCart);
   };
 
   return (

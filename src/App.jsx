@@ -14,6 +14,9 @@ function App() {
     axios
       .get("https://60d62397943aa60017768e77.mockapi.io/items")
       .then((res) => setItems(res.data));
+    axios
+      .get("https://61a4c68d4c822c0017041e68.mockapi.io/cart")
+      .then((res) => setCartItems(res.data));
   }, []);
 
   return (
@@ -24,6 +27,7 @@ function App() {
             cartIsOpened={cartIsOpened}
             setCartIsOpened={setCartIsOpened}
             cartItems={cartItems}
+            setCartItems={setCartItems}
           />
         )}
         <Header cartIsOpened={cartIsOpened} setCartIsOpened={setCartIsOpened} />
