@@ -1,6 +1,17 @@
+import axios from "axios";
+
 import styles from "./Drawer.module.scss";
 
 function Drawer(props) {
+  const onRemove = (idForRemove) => {
+    axios.delete(
+      `https://61a4c68d4c822c0017041e68.mockapi.io/cart/${idForRemove}`
+    );
+    props.setCartItems((prev) =>
+      prev.filter((item) => item.id !== idForRemove)
+    );
+  };
+
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
@@ -25,7 +36,11 @@ function Drawer(props) {
                   <p className="mb-5">{item.itemTitle}</p>
                   <b>{item.itemPrice}</b>
                 </div>
-                <img src="/img/btn-remove.svg" alt="remove" />
+                <img
+                  onClick={() => onRemove(item.id)}
+                  src="/img/btn-remove.svg"
+                  alt="remove"
+                />
               </div>
             ))}
         </div>
