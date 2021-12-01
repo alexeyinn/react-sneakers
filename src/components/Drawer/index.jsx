@@ -25,7 +25,7 @@ function Drawer(props) {
           />
         </h2>
         <div className={styles.items}>
-          {props.cartItems &&
+          {props.cartItems.length > 0 ? (
             props.cartItems.map((item) => (
               <div
                 key={item.id}
@@ -42,7 +42,34 @@ function Drawer(props) {
                   alt="remove"
                 />
               </div>
-            ))}
+            ))
+          ) : (
+            <div
+              class={
+                styles.cartEmpty +
+                " d-flex align-center justify-center flex-column flex"
+              }
+            >
+              <img
+                class="mb-20"
+                width="120px"
+                height="120px"
+                src="/img/empty-cart.png"
+                alt="Empty"
+              />
+              <h2>Корзина пустая</h2>
+              <p class="opacity-6">
+                Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
+              </p>
+              <button
+                onClick={() => props.setCartIsOpened(!props.cartIsOpened)}
+                class="greenButton"
+              >
+                <img className="backArrow" src="/img/arrow.svg" alt="Arrow" />
+                Вернуться назад
+              </button>
+            </div>
+          )}
         </div>
         <div className={styles.cartTotalBlock}>
           <ul>
