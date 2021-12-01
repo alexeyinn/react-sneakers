@@ -9,6 +9,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [cartIsOpened, setCartIsOpened] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     axios
@@ -18,6 +19,10 @@ function App() {
       .get("https://61a4c68d4c822c0017041e68.mockapi.io/cart")
       .then((res) => setCartItems(res.data));
   }, []);
+
+  const onInput = (e) => {
+    setInputValue(e.target.value);
+  };
 
   return (
     <div>
@@ -33,15 +38,22 @@ function App() {
         <Header cartIsOpened={cartIsOpened} setCartIsOpened={setCartIsOpened} />
         <div className="content p-40">
           <div className="mb-40 align-between justify-between d-flex">
-            <h1>Все кроссовки</h1>
+            <h1>{inputValue ? "Поиск по: " + inputValue : "Все кроссовки"}</h1>
             <div className="search-block d-flex">
               <img src="/img/search.svg" alt="search" />
-              <input placeholder="Поиск..." />
+              <input
+                onChange={onInput}
+                value={inputValue}
+                placeholder="Поиск..."
+              />
             </div>
           </div>
           <div className="d-flex flex-wrap">
-            {items &&
-              items.map((items) => (
+            {items
+              .filter((item) =>
+                item.title.toLowerCase().includes(inputValue.toLowerCase())
+              )
+              .map((items) => (
                 <Card
                   key={items.id}
                   itemTitle={items.title}
