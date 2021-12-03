@@ -3,13 +3,15 @@ import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 import Drawer from "./components/Drawer/";
 import Header from "./components/Header/";
 
 function App() {
   const [items, setItems] = useState([]);
-  const [cartIsOpened, setCartIsOpened] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [cartIsOpened, setCartIsOpened] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
@@ -42,6 +44,18 @@ function App() {
                 items={items}
                 inputValue={inputValue}
                 setInputValue={setInputValue}
+                setCartItems={setCartItems}
+                cartItems={cartItems}
+              />
+            }
+          />
+          <Route
+            path="/favorites"
+            exact
+            element={
+              <Favorites
+                favorites={favorites}
+                setFavorites={setFavorites}
                 setCartItems={setCartItems}
                 cartItems={cartItems}
               />
