@@ -28,9 +28,12 @@ function Home(props) {
           .map((items) => (
             <Card
               key={items.id}
+              id={items.id}
               itemTitle={items.title}
               itemSrc={items.imageUrl}
               itemPrice={items.price}
+              favorites={props.favorites}
+              setFavorites={props.setFavorites}
               onAdd={(obj) => props.setCartItems([...props.cartItems, obj])}
               onFavorite={(obj) =>
                 props.setFavorites([...props.favorites, obj])

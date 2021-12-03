@@ -10,10 +10,14 @@ function Favorites(props) {
         {props.favorites.map((items) => (
           <Card
             key={items.id}
+            id={items.id}
             itemTitle={items.itemTitle}
             itemSrc={items.itemSrc}
             itemPrice={items.itemPrice}
             onAdd={(obj) => props.setCartItems([...props.cartItems, obj])}
+            favorites={props.favorites}
+            setFavorites={props.setFavorites}
+            onFavorite={(obj) => props.setFavorites([...props.favorites, obj])}
           />
         ))}
       </div>
