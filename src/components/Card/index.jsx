@@ -18,6 +18,10 @@ function Card({ itemTitle, itemSrc, itemPrice, onAdd, onFavorite }) {
     setIsFavorite("/img/heart-liked.svg");
     let objForFavorite = { itemTitle, itemSrc, itemPrice };
     onFavorite(objForFavorite);
+    axios.post(
+      "https://61a4c68d4c822c0017041e68.mockapi.io/favorites",
+      objForFavorite
+    );
   };
 
   return (

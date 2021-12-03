@@ -21,6 +21,9 @@ function App() {
     axios
       .get("https://61a4c68d4c822c0017041e68.mockapi.io/cart")
       .then((res) => setCartItems(res.data));
+    axios
+      .get("https://61a4c68d4c822c0017041e68.mockapi.io/favorites")
+      .then((res) => setFavorites(res.data));
   }, []);
 
   return (
