@@ -32,6 +32,9 @@ function Home(props) {
               itemSrc={items.imageUrl}
               itemPrice={items.price}
               onAdd={(obj) => props.setCartItems([...props.cartItems, obj])}
+              onFavorite={(obj) =>
+                props.setFavorites([...props.favorites, obj])
+              }
             />
           ))}
       </div>

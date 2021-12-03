@@ -42,10 +42,12 @@ function App() {
             element={
               <Home
                 items={items}
+                cartItems={cartItems}
+                favorites={favorites}
+                setFavorites={setFavorites}
                 inputValue={inputValue}
                 setInputValue={setInputValue}
                 setCartItems={setCartItems}
-                cartItems={cartItems}
               />
             }
           />

@@ -3,8 +3,9 @@ import axios from "axios";
 
 import styles from "./Card.module.scss";
 
-function Card({ itemTitle, itemSrc, itemPrice, onAdd }) {
+function Card({ itemTitle, itemSrc, itemPrice, onAdd, onFavorite }) {
   const [isAdded, setIsAdded] = useState("/img/add-to-cart.svg");
+  const [isFavorite, setIsFavorite] = useState("/img/heart-unliked.svg");
 
   const onPlus = () => {
     setIsAdded("/img/added-to-cart.svg");
@@ -13,10 +14,16 @@ function Card({ itemTitle, itemSrc, itemPrice, onAdd }) {
     axios.post("https://61a4c68d4c822c0017041e68.mockapi.io/cart", objForCart);
   };
 
+  const toFavorite = () => {
+    setIsFavorite("/img/heart-liked.svg");
+    let objForFavorite = { itemTitle, itemSrc, itemPrice };
+    onFavorite(objForFavorite);
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.favorite}>
-        <img src="/img/heart-unliked.svg" alt="unliked" />
+        <img src={isFavorite} alt="unliked" onClick={toFavorite} />
       </div>
       <img className="sneakersPhoto" src={itemSrc} alt="sneakers" />
       <h5>{itemTitle}</h5>
