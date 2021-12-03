@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Route, Routes } from "react-router-dom";
 
-import Card from "./components/Card/";
+import Home from "./pages/Home";
 import Drawer from "./components/Drawer/";
 import Header from "./components/Header/";
 
@@ -20,10 +21,6 @@ function App() {
       .then((res) => setCartItems(res.data));
   }, []);
 
-  const onInput = (e) => {
-    setInputValue(e.target.value);
-  };
-
   return (
     <div>
       <div className="App clear">
@@ -36,34 +33,21 @@ function App() {
           />
         )}
         <Header cartIsOpened={cartIsOpened} setCartIsOpened={setCartIsOpened} />
-        <div className="content p-40">
-          <div className="mb-40 align-between justify-between d-flex">
-            <h1>{inputValue ? "Поиск по: " + inputValue : "Все кроссовки"}</h1>
-            <div className="search-block d-flex">
-              <img src="/img/search.svg" alt="search" />
-              <input
-                onChange={onInput}
-                value={inputValue}
-                placeholder="Поиск..."
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <Home
+                items={items}
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                setCartItems={setCartItems}
+                cartItems={cartItems}
               />
-            </div>
-          </div>
-          <div className="d-flex flex-wrap">
-            {items
-              .filter((item) =>
-                item.title.toLowerCase().includes(inputValue.toLowerCase())
-              )
-              .map((items) => (
-                <Card
-                  key={items.id}
-                  itemTitle={items.title}
-                  itemSrc={items.imageUrl}
-                  itemPrice={items.price}
-                  onAdd={(obj) => setCartItems([...cartItems, obj])}
-                />
-              ))}
-          </div>
-        </div>
+            }
+          />
+        </Routes>
       </div>
     </div>
   );

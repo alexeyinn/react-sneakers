@@ -15,7 +15,7 @@ function Card({ itemTitle, itemSrc, itemPrice, onAdd }) {
 
   return (
     <div className={styles.card}>
-      <div className={styles.favourite}>
+      <div className={styles.favorite}>
         <img src="/img/heart-unliked.svg" alt="unliked" />
       </div>
       <img className="sneakersPhoto" src={itemSrc} alt="sneakers" />
