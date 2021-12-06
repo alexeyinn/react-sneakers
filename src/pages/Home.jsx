@@ -45,6 +45,9 @@ function Home(props) {
               onFavorite={(obj) =>
                 props.setFavorites([...props.favorites, obj])
               }
+              favorited={props.favorites.some(
+                (item) => item.itemSrc === items.imageUrl
+              )}
             />
           ))}
       </div>

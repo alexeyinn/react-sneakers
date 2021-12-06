@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import styles from "./Card.module.scss";
@@ -14,9 +14,14 @@ function Card({
   setFavorites,
   cartItems,
   setCartItems,
+  favorited,
 }) {
   const [isAdded, setIsAdded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    setIsFavorite(favorited);
+  }, [favorited]);
 
   const onPlus = async () => {
     setIsAdded(!isAdded);
