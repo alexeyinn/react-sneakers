@@ -14,7 +14,7 @@ function Card({
   setFavorites,
 }) {
   const [isAdded, setIsAdded] = useState("/img/add-to-cart.svg");
-  const [isFavorite, setIsFavorite] = useState("/img/heart-unliked.svg");
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const onPlus = () => {
     setIsAdded("/img/added-to-cart.svg");
@@ -24,19 +24,19 @@ function Card({
   };
 
   const toFavorite = async () => {
-    setIsFavorite("/img/heart-liked.svg");
+    setIsFavorite(!isFavorite);
     let objForFavorite = { id, itemTitle, itemSrc, itemPrice };
     onFavorite(objForFavorite);
-    let isFavorite = favorites.find(
+    let checkFavorite = favorites.find(
       (item) => item.itemSrc === objForFavorite.itemSrc
     );
 
     try {
-      if (isFavorite) {
+      if (checkFavorite) {
         axios.delete(
-          `https://61a4c68d4c822c0017041e68.mockapi.io/favorites/${isFavorite.id}`
+          `https://61a4c68d4c822c0017041e68.mockapi.io/favorites/${checkFavorite.id}`
         );
-        setFavorites(favorites.filter((item) => item.id !== isFavorite.id));
+        setFavorites(favorites.filter((item) => item.id !== checkFavorite.id));
       } else {
         let { data } = await axios.post(
           "https://61a4c68d4c822c0017041e68.mockapi.io/favorites",
@@ -52,7 +52,11 @@ function Card({
   return (
     <div className={styles.card}>
       <div className={styles.favorite}>
-        <img src={isFavorite} alt="unliked" onClick={toFavorite} />
+        <img
+          src={isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"}
+          alt="unliked"
+          onClick={toFavorite}
+        />
       </div>
       <img className="sneakersPhoto" src={itemSrc} alt="sneakers" />
       <h5>{itemTitle}</h5>
