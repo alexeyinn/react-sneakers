@@ -19,6 +19,7 @@ function Favorites(props) {
             setFavorites={props.setFavorites}
             onFavorite={(obj) => props.setFavorites([...props.favorites, obj])}
             favorited
+            loaded
           />
         ))}
       </div>

@@ -9,24 +9,11 @@ function Home(props) {
     props.setInputValue("");
   };
 
-  return (
-    <div className="content p-40">
-      <div className="mb-40 align-between justify-between d-flex">
-        <h1>
-          {props.inputValue ? "Поиск по: " + props.inputValue : "Все кроссовки"}
-        </h1>
-        <div className="search-block d-flex">
-          <img src="/img/search.svg" alt="search" />
-          <input
-            onChange={onInput}
-            value={props.inputValue}
-            placeholder="Поиск..."
-          />
-          <img onClick={onRemoveInput} src="/img/btn-remove.svg" alt="remove" />
-        </div>
-      </div>
-      <div className="d-flex flex-wrap">
-        {props.items
+  const renderCards = () => {
+    // return [...Array(8)].map(() => <Card />);
+    //loaded={(props.isLoaded = false)}
+    return props.isLoaded
+      ? props.items
           .filter((item) =>
             item.title.toLowerCase().includes(props.inputValue.toLowerCase())
           )
@@ -51,9 +38,29 @@ function Home(props) {
               inCart={props.cartItems.some(
                 (item) => item.itemSrc === items.imageUrl
               )}
+              loaded={props.isLoaded}
             />
-          ))}
+          ))
+      : [...Array(8)].map((item, index) => <Card key={index} />);
+  };
+
+  return (
+    <div className="content p-40">
+      <div className="mb-40 align-between justify-between d-flex">
+        <h1>
+          {props.inputValue ? "Поиск по: " + props.inputValue : "Все кроссовки"}
+        </h1>
+        <div className="search-block d-flex">
+          <img src="/img/search.svg" alt="search" />
+          <input
+            onChange={onInput}
+            value={props.inputValue}
+            placeholder="Поиск..."
+          />
+          <img onClick={onRemoveInput} src="/img/btn-remove.svg" alt="remove" />
+        </div>
       </div>
+      <div className="d-flex flex-wrap">{renderCards()}</div>
     </div>
   );
 }

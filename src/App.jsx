@@ -13,17 +13,28 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const [cartIsOpened, setCartIsOpened] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("https://60d62397943aa60017768e77.mockapi.io/items")
-      .then((res) => setItems(res.data));
-    axios
-      .get("https://61a4c68d4c822c0017041e68.mockapi.io/cart")
-      .then((res) => setCartItems(res.data));
-    axios
-      .get("https://61a4c68d4c822c0017041e68.mockapi.io/favorites")
-      .then((res) => setFavorites(res.data));
+    const fetchData = async () => {
+      let cartRes = await axios.get(
+        "https://61a4c68d4c822c0017041e68.mockapi.io/cart"
+      );
+      let favoriteRes = await axios.get(
+        "https://61a4c68d4c822c0017041e68.mockapi.io/favorites"
+      );
+      let itemsRes = await axios.get(
+        "https://60d62397943aa60017768e77.mockapi.io/items"
+      );
+
+      setCartItems(cartRes.data);
+      setFavorites(favoriteRes.data);
+      setItems(itemsRes.data);
+
+      setIsLoaded(true);
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -51,6 +62,7 @@ function App() {
                 inputValue={inputValue}
                 setInputValue={setInputValue}
                 setCartItems={setCartItems}
+                isLoaded={isLoaded}
               />
             }
           />
