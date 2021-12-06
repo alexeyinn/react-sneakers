@@ -48,6 +48,9 @@ function Home(props) {
               favorited={props.favorites.some(
                 (item) => item.itemSrc === items.imageUrl
               )}
+              inCart={props.cartItems.some(
+                (item) => item.itemSrc === items.imageUrl
+              )}
             />
           ))}
       </div>

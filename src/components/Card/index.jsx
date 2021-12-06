@@ -15,6 +15,7 @@ function Card({
   cartItems,
   setCartItems,
   favorited,
+  inCart,
 }) {
   const [isAdded, setIsAdded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -22,6 +23,10 @@ function Card({
   useEffect(() => {
     setIsFavorite(favorited);
   }, [favorited]);
+
+  useEffect(() => {
+    setIsAdded(inCart);
+  }, [inCart]);
 
   const onPlus = async () => {
     setIsAdded(!isAdded);
