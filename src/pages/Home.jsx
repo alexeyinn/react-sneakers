@@ -39,6 +39,8 @@ function Home(props) {
               itemPrice={items.price}
               favorites={props.favorites}
               setFavorites={props.setFavorites}
+              cartItems={props.cartItems}
+              setCartItems={props.setCartItems}
               onAdd={(obj) => props.setCartItems([...props.cartItems, obj])}
               onFavorite={(obj) =>
                 props.setFavorites([...props.favorites, obj])

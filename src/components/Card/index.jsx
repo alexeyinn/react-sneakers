@@ -12,15 +12,36 @@ function Card({
   onFavorite,
   favorites,
   setFavorites,
+  cartItems,
+  setCartItems,
 }) {
-  const [isAdded, setIsAdded] = useState("/img/add-to-cart.svg");
+  const [isAdded, setIsAdded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const onPlus = () => {
-    setIsAdded("/img/added-to-cart.svg");
-    let objForCart = { itemTitle, itemSrc, itemPrice };
+  const onPlus = async () => {
+    setIsAdded(!isAdded);
+    let objForCart = { id, itemTitle, itemSrc, itemPrice };
     onAdd(objForCart);
-    axios.post("https://61a4c68d4c822c0017041e68.mockapi.io/cart", objForCart);
+    let checkCart = cartItems.find(
+      (item) => item.itemSrc === objForCart.itemSrc
+    );
+
+    try {
+      if (checkCart) {
+        axios.delete(
+          `https://61a4c68d4c822c0017041e68.mockapi.io/cart/${checkCart.id}`
+        );
+        setCartItems(cartItems.filter((item) => item.id !== checkCart.id));
+      } else {
+        let { data } = await axios.post(
+          "https://61a4c68d4c822c0017041e68.mockapi.io/cart",
+          objForCart
+        );
+        onAdd(data);
+      }
+    } catch (error) {
+      alert(`Ошибка сервера: ${error} Попробуйте снова!`);
+    }
   };
 
   const toFavorite = async () => {
@@ -45,7 +66,7 @@ function Card({
         onFavorite(data);
       }
     } catch (error) {
-      alert(`Ошибка сервера ${error} Попробуйте снова!`);
+      alert(`Ошибка сервера: ${error} Попробуйте снова!`);
     }
   };
 
@@ -66,7 +87,10 @@ function Card({
           <b>{itemPrice}</b>
         </div>
         <button className="button" onClick={onPlus}>
-          <img src={isAdded} alt="plus" />
+          <img
+            src={isAdded ? "/img/added-to-cart.svg" : "/img/add-to-cart.svg"}
+            alt="plus"
+          />
         </button>
       </div>
     </div>
