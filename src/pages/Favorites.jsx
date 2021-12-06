@@ -18,6 +18,11 @@ function Favorites(props) {
             favorites={props.favorites}
             setFavorites={props.setFavorites}
             onFavorite={(obj) => props.setFavorites([...props.favorites, obj])}
+            inCart={props.cartItems.some(
+              (item) => item.itemSrc === items.itemSrc
+            )}
+            cartItems={props.cartItems}
+            setCartItems={props.setCartItems}
             favorited
             loaded
           />

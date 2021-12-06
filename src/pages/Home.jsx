@@ -10,8 +10,6 @@ function Home(props) {
   };
 
   const renderCards = () => {
-    // return [...Array(8)].map(() => <Card />);
-    //loaded={(props.isLoaded = false)}
     return props.isLoaded
       ? props.items
           .filter((item) =>
