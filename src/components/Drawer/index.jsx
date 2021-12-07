@@ -1,18 +1,49 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 
 import AppContext from "../../context";
 import styles from "./Drawer.module.scss";
+import InfoBlock from "../InfoBlock";
 
 function Drawer() {
   const { cartItems, setCartItems, cartIsOpened, setCartIsOpened } =
     useContext(AppContext);
+
+  let dataForBlock = {
+    imageSrc: "/img/empty-cart.png",
+    title: "Корзина пустая",
+    description: "Вы еще не оформили заказ",
+  };
+
+  let [hasOrder, setHasOrder] = useState(dataForBlock);
 
   const onRemove = (idForRemove) => {
     axios.delete(
       `https://61a4c68d4c822c0017041e68.mockapi.io/cart/${idForRemove}`
     );
     setCartItems((prev) => prev.filter((item) => item.id !== idForRemove));
+  };
+
+  const doOrder = async () => {
+    try {
+      let { data } = await axios.post(
+        "https://61a4c68d4c822c0017041e68.mockapi.io/orders",
+        cartItems
+      );
+      setCartItems([]);
+      setHasOrder({
+        imageSrc: "/img/order.svg",
+        title: "Заказ оформлен!",
+        description: `Ваш заказа №${data.id} скоро будет передан курьерской доставке`,
+      });
+      for (let i = 0; i <= cartItems.length; i++) {
+        axios.delete(
+          `https://61a4c68d4c822c0017041e68.mockapi.io/cart/${i + 1}`
+        );
+      }
+    } catch (error) {
+      alert(`Ошибка сервера: ${error} Попробуйте снова!`);
+    }
   };
 
   return (
@@ -47,31 +78,7 @@ function Drawer() {
               </div>
             ))
           ) : (
-            <div
-              className={
-                styles.cartEmpty +
-                " d-flex align-center justify-center flex-column flex"
-              }
-            >
-              <img
-                className="mb-20"
-                width="120px"
-                height="120px"
-                src="/img/empty-cart.png"
-                alt="Empty"
-              />
-              <h2>Корзина пустая</h2>
-              <p className="opacity-6">
-                Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-              </p>
-              <button
-                onClick={() => setCartIsOpened(!cartIsOpened)}
-                className="greenButton"
-              >
-                <img className="backArrow" src="/img/arrow.svg" alt="Arrow" />
-                Вернуться назад
-              </button>
-            </div>
+            <InfoBlock dataForBlock={hasOrder} />
           )}
         </div>
         <div className={styles.cartTotalBlock}>
@@ -87,7 +94,7 @@ function Drawer() {
               <b>1074 руб.</b>
             </li>
           </ul>
-          <button className="greenButton">
+          <button onClick={doOrder} className="greenButton">
             Оформить заказ
             <img src="/img/arrow.svg" alt="arrow" />
           </button>
