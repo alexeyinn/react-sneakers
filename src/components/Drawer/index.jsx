@@ -16,6 +16,7 @@ function Drawer() {
   };
 
   let [hasOrder, setHasOrder] = useState(dataForBlock);
+  let [loading, setLoading] = useState(false);
 
   const onRemove = (idForRemove) => {
     axios.delete(
@@ -25,6 +26,7 @@ function Drawer() {
   };
 
   const doOrder = async () => {
+    setLoading(true);
     try {
       let { data } = await axios.post(
         "https://61a4c68d4c822c0017041e68.mockapi.io/orders",
@@ -44,6 +46,7 @@ function Drawer() {
     } catch (error) {
       alert(`Ошибка сервера: ${error} Попробуйте снова!`);
     }
+    setLoading(false);
   };
 
   return (
@@ -94,7 +97,7 @@ function Drawer() {
               <b>1074 руб.</b>
             </li>
           </ul>
-          <button onClick={doOrder} className="greenButton">
+          <button disabled={loading} onClick={doOrder} className="greenButton">
             Оформить заказ
             <img src="/img/arrow.svg" alt="arrow" />
           </button>
