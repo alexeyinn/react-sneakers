@@ -1,15 +1,18 @@
+import { useContext } from "react";
 import axios from "axios";
 
+import AppContext from "../../context";
 import styles from "./Drawer.module.scss";
 
-function Drawer(props) {
+function Drawer() {
+  const { cartItems, setCartItems, cartIsOpened, setCartIsOpened } =
+    useContext(AppContext);
+
   const onRemove = (idForRemove) => {
     axios.delete(
       `https://61a4c68d4c822c0017041e68.mockapi.io/cart/${idForRemove}`
     );
-    props.setCartItems((prev) =>
-      prev.filter((item) => item.id !== idForRemove)
-    );
+    setCartItems((prev) => prev.filter((item) => item.id !== idForRemove));
   };
 
   return (
@@ -21,12 +24,12 @@ function Drawer(props) {
             className="cu-p"
             src="/img/btn-remove.svg"
             alt="close"
-            onClick={() => props.setCartIsOpened(!props.cartIsOpened)}
+            onClick={() => setCartIsOpened(!cartIsOpened)}
           />
         </h2>
         <div className={styles.items}>
-          {props.cartItems.length > 0 ? (
-            props.cartItems.map((item) => (
+          {cartItems.length > 0 ? (
+            cartItems.map((item) => (
               <div
                 key={item.id}
                 className={styles.cartItem + " d-flex align-center mb-20"}
@@ -62,7 +65,7 @@ function Drawer(props) {
                 Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
               </p>
               <button
-                onClick={() => props.setCartIsOpened(!props.cartIsOpened)}
+                onClick={() => setCartIsOpened(!cartIsOpened)}
                 className="greenButton"
               >
                 <img className="backArrow" src="/img/arrow.svg" alt="Arrow" />

@@ -1,19 +1,33 @@
+import { useContext } from "react";
+
+import AppContext from "../context";
 import Card from "../components/Card";
 
-function Home(props) {
+function Home() {
+  const {
+    favorites,
+    setFavorites,
+    items,
+    cartItems,
+    setCartItems,
+    inputValue,
+    setInputValue,
+    isLoaded,
+  } = useContext(AppContext);
+
   const onInput = (e) => {
-    props.setInputValue(e.target.value);
+    setInputValue(e.target.value);
   };
 
   const onRemoveInput = () => {
-    props.setInputValue("");
+    setInputValue("");
   };
 
   const renderCards = () => {
-    return props.isLoaded
-      ? props.items
+    return isLoaded
+      ? items
           .filter((item) =>
-            item.title.toLowerCase().includes(props.inputValue.toLowerCase())
+            item.title.toLowerCase().includes(inputValue.toLowerCase())
           )
           .map((items) => (
             <Card
@@ -22,21 +36,12 @@ function Home(props) {
               itemTitle={items.title}
               itemSrc={items.imageUrl}
               itemPrice={items.price}
-              favorites={props.favorites}
-              setFavorites={props.setFavorites}
-              cartItems={props.cartItems}
-              setCartItems={props.setCartItems}
-              onAdd={(obj) => props.setCartItems([...props.cartItems, obj])}
-              onFavorite={(obj) =>
-                props.setFavorites([...props.favorites, obj])
-              }
-              favorited={props.favorites.some(
+              onAdd={(obj) => setCartItems([...cartItems, obj])}
+              onFavorite={(obj) => setFavorites([...favorites, obj])}
+              favorited={favorites.some(
                 (item) => item.itemSrc === items.imageUrl
               )}
-              inCart={props.cartItems.some(
-                (item) => item.itemSrc === items.imageUrl
-              )}
-              loaded={props.isLoaded}
+              inCart={cartItems.some((item) => item.itemSrc === items.imageUrl)}
             />
           ))
       : [...Array(8)].map((item, index) => <Card key={index} />);
@@ -45,16 +50,10 @@ function Home(props) {
   return (
     <div className="content p-40">
       <div className="mb-40 align-between justify-between d-flex">
-        <h1>
-          {props.inputValue ? "Поиск по: " + props.inputValue : "Все кроссовки"}
-        </h1>
+        <h1>{inputValue ? "Поиск по: " + inputValue : "Все кроссовки"}</h1>
         <div className="search-block d-flex">
           <img src="/img/search.svg" alt="search" />
-          <input
-            onChange={onInput}
-            value={props.inputValue}
-            placeholder="Поиск..."
-          />
+          <input onChange={onInput} value={inputValue} placeholder="Поиск..." />
           <img onClick={onRemoveInput} src="/img/btn-remove.svg" alt="remove" />
         </div>
       </div>

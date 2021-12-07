@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
+import AppContext from "../../context";
 import styles from "./Header.module.scss";
 
-function Header(props) {
+function Header() {
+  const { cartIsOpened, setCartIsOpened } = useContext(AppContext);
+
   return (
     <header className="d-flex justify-between align-center p-40">
       <Link to="/">
@@ -15,10 +19,7 @@ function Header(props) {
         </div>
       </Link>
       <ul className="d-flex">
-        <li
-          className="mr-30"
-          onClick={() => props.setCartIsOpened(!props.cartIsOpened)}
-        >
+        <li className="mr-30" onClick={() => setCartIsOpened(!cartIsOpened)}>
           <img src="img/cart.svg" alt="cart" />
           <span>1205 руб.</span>
         </li>

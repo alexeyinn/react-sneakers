@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ContentLoader from "react-content-loader";
 
+import AppContext from "../../context";
 import styles from "./Card.module.scss";
 
 function Card({
@@ -11,14 +12,11 @@ function Card({
   itemPrice,
   onAdd,
   onFavorite,
-  favorites,
-  setFavorites,
-  cartItems,
-  setCartItems,
   favorited,
   inCart,
-  loaded,
 }) {
+  const { favorites, setFavorites, cartItems, setCartItems, isLoaded } =
+    useContext(AppContext);
   const [isAdded, setIsAdded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -84,7 +82,7 @@ function Card({
 
   return (
     <div className={styles.card}>
-      {loaded ? (
+      {isLoaded ? (
         <>
           <div className={styles.favorite}>
             <img

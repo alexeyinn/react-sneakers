@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 
+import AppContext from "./context.js";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Drawer from "./components/Drawer/";
@@ -38,49 +39,31 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <>
       <div className="App clear">
-        {cartIsOpened && (
-          <Drawer
-            cartIsOpened={cartIsOpened}
-            setCartIsOpened={setCartIsOpened}
-            cartItems={cartItems}
-            setCartItems={setCartItems}
-          />
-        )}
-        <Header cartIsOpened={cartIsOpened} setCartIsOpened={setCartIsOpened} />
-        <Routes>
-          <Route
-            path="/"
-            exact
-            element={
-              <Home
-                items={items}
-                cartItems={cartItems}
-                favorites={favorites}
-                setFavorites={setFavorites}
-                inputValue={inputValue}
-                setInputValue={setInputValue}
-                setCartItems={setCartItems}
-                isLoaded={isLoaded}
-              />
-            }
-          />
-          <Route
-            path="/favorites"
-            exact
-            element={
-              <Favorites
-                favorites={favorites}
-                setFavorites={setFavorites}
-                setCartItems={setCartItems}
-                cartItems={cartItems}
-              />
-            }
-          />
-        </Routes>
+        <AppContext.Provider
+          value={{
+            favorites,
+            setFavorites,
+            items,
+            cartItems,
+            setCartItems,
+            cartIsOpened,
+            setCartIsOpened,
+            inputValue,
+            setInputValue,
+            isLoaded,
+          }}
+        >
+          {cartIsOpened && <Drawer />}
+          <Header />
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/favorites" exact element={<Favorites />} />
+          </Routes>
+        </AppContext.Provider>
       </div>
-    </div>
+    </>
   );
 }
 
