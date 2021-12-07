@@ -38,8 +38,8 @@ function Drawer() {
         title: "Заказ оформлен!",
         description: `Ваш заказа №${data.id} скоро будет передан курьерской доставке`,
       });
-      for (let i = 0; i <= cartItems.length; i++) {
-        axios.delete(
+      for (let i = 0; i < cartItems.length; i++) {
+        await axios.delete(
           `https://61a4c68d4c822c0017041e68.mockapi.io/cart/${i + 1}`
         );
       }
