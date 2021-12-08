@@ -18,25 +18,28 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      let cartRes = await axios.get(
-        "https://61a4c68d4c822c0017041e68.mockapi.io/cart"
-      );
-      let favoriteRes = await axios.get(
-        "https://61a4c68d4c822c0017041e68.mockapi.io/favorites"
-      );
-      let itemsRes = await axios.get(
-        "https://60d62397943aa60017768e77.mockapi.io/items"
-      );
+    try {
+      const fetchData = async () => {
+        let cartRes = await axios.get(
+          "https://61a4c68d4c822c0017041e68.mockapi.io/cart"
+        );
+        let favoriteRes = await axios.get(
+          "https://61a4c68d4c822c0017041e68.mockapi.io/favorites"
+        );
+        let itemsRes = await axios.get(
+          "https://60d62397943aa60017768e77.mockapi.io/items"
+        );
 
-      setCartItems(cartRes.data);
-      setFavorites(favoriteRes.data);
-      setItems(itemsRes.data);
+        setCartItems(cartRes.data);
+        setFavorites(favoriteRes.data);
+        setItems(itemsRes.data);
 
-      setIsLoaded(true);
-    };
-
-    fetchData();
+        setIsLoaded(true);
+      };
+      fetchData();
+    } catch (error) {
+      alert(`Ошибка сервера: ${error} Попробуйте снова!`);
+    }
   }, []);
 
   return (

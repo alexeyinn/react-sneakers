@@ -86,27 +86,35 @@ function Drawer() {
               </div>
             ))
           ) : (
-            <InfoBlock dataForBlock={hasOrder} />
+            <div className={styles.emptyCartInfo}>
+              <InfoBlock dataForBlock={hasOrder} />
+            </div>
           )}
         </div>
-        <div className={styles.cartTotalBlock}>
-          <ul>
-            <li>
-              <span>Итого:</span>
-              <div></div>
-              <b>{totalPrice} руб. </b>
-            </li>
-            <li>
-              <span>+ Налог 8%</span>
-              <div></div>
-              <b>{totalPrice * 0.08} руб.</b>
-            </li>
-          </ul>
-          <button disabled={loading} onClick={doOrder} className="greenButton">
-            Оформить заказ
-            <img src="/img/arrow.svg" alt="arrow" />
-          </button>
-        </div>
+        {cartItems.length > 0 && (
+          <div className={styles.cartTotalBlock}>
+            <ul>
+              <li>
+                <span>Итого:</span>
+                <div></div>
+                <b>{totalPrice} руб. </b>
+              </li>
+              <li>
+                <span>+ Налог 8%</span>
+                <div></div>
+                <b>{totalPrice * 0.08} руб.</b>
+              </li>
+            </ul>
+            <button
+              disabled={loading}
+              onClick={doOrder}
+              className="greenButton"
+            >
+              Оформить заказ
+              <img src="/img/arrow.svg" alt="arrow" />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
