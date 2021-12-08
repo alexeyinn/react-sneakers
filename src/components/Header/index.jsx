@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 
 import AppContext from "../../context";
 import styles from "./Header.module.scss";
+import { useCart } from "../../hooks/useCart";
 
 function Header() {
   const { cartIsOpened, setCartIsOpened } = useContext(AppContext);
+
+  let totalPrice = useCart();
 
   return (
     <header className="d-flex justify-between align-center p-40">
@@ -21,7 +24,7 @@ function Header() {
       <ul className="d-flex">
         <li className="mr-30" onClick={() => setCartIsOpened(!cartIsOpened)}>
           <img src="img/cart.svg" alt="cart" />
-          <span>1205 руб.</span>
+          <span>{totalPrice} руб.</span>
         </li>
         <li>
           <Link to="/favorites">

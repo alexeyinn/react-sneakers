@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import axios from "axios";
+import { useCart } from "../../hooks/useCart";
 
 import AppContext from "../../context";
 import styles from "./Drawer.module.scss";
@@ -8,6 +9,8 @@ import InfoBlock from "../InfoBlock";
 function Drawer() {
   const { cartItems, setCartItems, cartIsOpened, setCartIsOpened } =
     useContext(AppContext);
+
+  let totalPrice = useCart();
 
   let dataForBlock = {
     imageSrc: "/img/empty-cart.png",
@@ -89,12 +92,12 @@ function Drawer() {
             <li>
               <span>Итого:</span>
               <div></div>
-              <b>21 498 руб. </b>
+              <b>{totalPrice} руб. </b>
             </li>
             <li>
-              <span>Налог 8%</span>
+              <span>+ Налог 8%</span>
               <div></div>
-              <b>1074 руб.</b>
+              <b>{totalPrice * 0.08} руб.</b>
             </li>
           </ul>
           <button disabled={loading} onClick={doOrder} className="greenButton">
