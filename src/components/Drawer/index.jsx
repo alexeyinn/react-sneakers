@@ -33,7 +33,9 @@ function Drawer() {
     try {
       let { data } = await axios.post(
         "https://61a4c68d4c822c0017041e68.mockapi.io/orders",
-        cartItems
+        {
+          items: cartItems,
+        }
       );
       setCartItems([]);
       setHasOrder({

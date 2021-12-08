@@ -32,7 +32,9 @@ function Header() {
           </Link>
         </li>
         <li>
-          <img src="img/user.svg" alt="user" />
+          <Link to="/orders">
+            <img src="img/user.svg" alt="user" />
+          </Link>
         </li>
       </ul>
     </header>
